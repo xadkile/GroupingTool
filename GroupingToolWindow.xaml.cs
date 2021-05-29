@@ -149,9 +149,12 @@ namespace GroupingTool {
                 //int trueFromRow = this.getTrueFromRow(fromRow);
                 //int trueToRow = this.getTrueToRow(toRow);
                 InputFacade inputFacade = new InputFacade(dataSheetName, labelRangeAddress, groupByFlag, sortFlagList.ToImmutableList(), fromRow, toRow);
-                MainLogic.run(inputFacade.toModel());
-
-                this.Close();
+                Either<Exception,object> runResult = MainLogic.run(inputFacade.toModel());
+                if (runResult.isOk()) {
+                    this.Close();
+                } else {
+                    MessageBox.Show(runResult.getException().Message);
+                }
             }
         }
        
@@ -194,8 +197,15 @@ namespace GroupingTool {
             this.refreshForm();
         }
 
+        /**
+         * refresh this form
+         */ 
         private void refreshForm() {
-            if (this.dataSheetComboBoxLabelList.Count != 0) {
+            
+            bool thereAreSheets = this.dataSheetComboBoxLabelList.Count != 0;
+            bool oneSheetIsSelected = this.dataSheetComboBox.SelectedIndex != -1;
+
+            if (thereAreSheets && oneSheetIsSelected) {
                 // update group by combobox
                 this.groupByComboBoxLabelList.Clear();
                 this.sortByComboBoxLabelList.Clear();
@@ -203,9 +213,11 @@ namespace GroupingTool {
                 String selectedWSName = this.dataSheetComboBoxLabelList[this.dataSheetComboBox.SelectedIndex];
                 Worksheet selectedSheet = (Worksheet)this.getCurrentWorkbook().Worksheets[selectedWSName];
                 try {
-                    if (!String.IsNullOrEmpty(this.labelRangeTextBox.Text)) {
+                    bool labelRangeIsNotNull = !String.IsNullOrEmpty(this.labelRangeTextBox.Text);
+                    if (labelRangeIsNotNull) {
                         Range labelRange = selectedSheet.Range[this.labelRangeTextBox.Text];
-                        if (labelRange.Rows.Count != 1) {
+                        bool labelRangeRepresentARealRange = labelRange.Rows.Count != 1;
+                        if (labelRangeRepresentARealRange) {
                             MessageBox.Show("Label range should be a single row");
                         } else {
                             foreach (Range cell in labelRange.Cells) {
@@ -225,10 +237,8 @@ namespace GroupingTool {
         }
 
         private void labelRangeTextBox_KeyDown(object sender, KeyEventArgs e) {
-            if(e.Key == Key.Enter) {
-                if (this.dataSheetComboBox.SelectedIndex != -1) {
-                    this.refreshForm();
-                }
+            if (e.Key == Key.Enter) {
+                this.refreshForm();
             }
         }
 
@@ -238,6 +248,12 @@ namespace GroupingTool {
             }
         }
 
+        private void labelRangeTextBox_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e) {
+            this.refreshForm();
+        }
 
+        private void refreshFormWithSheetSelectionCheck() {
+
+        }
     }
 }

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupingTool", "GroupingToo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{766884EC-0AE6-4AC3-8DAC-A67F86955E4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGroupingTool", "..\TestGroupingTool\TestGroupingTool.csproj", "{C67BB889-D021-4F14-AFA8-F8E600F64876}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGroupingTool", "..\TestGroupingTool\TestGroupingTool.csproj", "{C67BB889-D021-4F14-AFA8-F8E600F64876}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

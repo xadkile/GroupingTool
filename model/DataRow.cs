@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 namespace GroupingTool.model {
+	/**
+	 * Represent a row
+	 */
 	public class DataRow : IComparable<DataRow> {
 
 		public readonly object groupFlag;

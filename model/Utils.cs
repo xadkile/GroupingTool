@@ -25,6 +25,18 @@ namespace GroupingTool.model {
             }
         }
 
+        public static object[] processNullArray(object[] inputArr) {
+            List<object> tmpList = new List<object>();
+            foreach(object e in inputArr) {
+                if(e == null) {
+                    tmpList.Add("");
+                } else {
+                    tmpList.Add(e);
+                }
+            }
+            return tmpList.ToArray();
+        }
+
         public static T[][] toJaggedArray<T>(T[,] twoDimensionalArray, bool isStartAtOne) {
             int offset = 0;
             if (isStartAtOne) {

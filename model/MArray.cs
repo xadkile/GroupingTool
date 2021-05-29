@@ -21,7 +21,12 @@ namespace GroupingTool.model {
                 object[,] valueArray= (object[,])rowRange.Value2;
                 object[][] jaggedValueArray = Utils.toJaggedArray(valueArray, true);
                 object[] rowData = jaggedValueArray[0];
-                dataRowList.Add(new DataRow(rowData, groupByIndex, sortFlagIndices));
+                object groupFlag = rowData[groupByIndex];
+                if(groupFlag != null) {
+                    object[] nonNullRowData = Utils.processNullArray(rowData);
+                    dataRowList.Add(new DataRow(nonNullRowData, groupByIndex, sortFlagIndices));
+                }
+                
             }
             return new MArray(dataRowList.ToImmutableList());
         }
@@ -51,9 +56,12 @@ namespace GroupingTool.model {
         public ImmutableList<MArrayWithGroup> splitByGroupFlag() {
             List<MArrayWithGroup> rt = new List<MArrayWithGroup>();
             IEnumerable<IGrouping<object, DataRow>> groups = this.rows.GroupBy((DataRow e )=> e.groupFlag);
+            ImmutableList<string> names = groups.Select(e => e.Key.ToString()).ToImmutableList();
+
+            // validate name before create sheet
             foreach (IGrouping<object,DataRow> grp in groups) {
-                rt.Add(new MArrayWithGroup(
-                    grp.Key, 
+                    rt.Add(new MArrayWithGroup(
+                    grp.Key,
                     new MArray(grp.ToImmutableList()).sortRows()
                     ));
             }

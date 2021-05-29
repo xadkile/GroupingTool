@@ -22,8 +22,6 @@ namespace GroupingTool.model {
             string groupName = this.groupFlag.ToString();
             
             Worksheet sheet = this.getWorksheetOrCreateIfDontExist(groupName);
-            //Range last = (Range)sheet.Cells.SpecialCells(XlCellType.xlCellTypeLastCell, Type.Missing);
-            // get last row count
             int nextRow = Utils.getLastRow(sheet)+1;
             this.pourToSheet(sheet, nextRow, col);
         }
@@ -34,8 +32,17 @@ namespace GroupingTool.model {
                 return (Worksheet) book.Worksheets[name];
             }catch(Exception exception) {
                 Worksheet rt = (Worksheet) book.Worksheets.Add();
-                rt.Name = name;
-                return rt;
+                string oldName = rt.Name;
+                try {
+                    rt.Name = name;
+                    return rt;
+                }catch(Exception e) {
+                    //rt.Application.DisplayAlerts = false;
+                    //rt.Delete();
+                    //rt.Application.DisplayAlerts = true;
+                    //rt.Name = oldName;
+                    throw new Exception(String.Format("Invalid sheet name:{0}\n{1}",name,e.Message));
+                }
             }
         }
     }

@@ -13,13 +13,11 @@
         <Label Content="Group by" HorizontalAlignment="Left" Margin="18,163,0,0" VerticalAlignment="Top" Height="28" Width="73"/>
         <ComboBox x:Name="groupByComboBox" HorizontalAlignment="Left" Margin="90,166,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="groupByComboBox_SelectionChanged"/>
         <Label Content="Sort by" HorizontalAlignment="Left" Margin="17,209,0,0" VerticalAlignment="Top" Height="28" Width="73"/>
-        <ListBox x:Name="sortByListBox" HorizontalAlignment="Left" Height="122" Margin="90,209,0,0" VerticalAlignment="Top" Width="120"  SelectionMode="Multiple">
-
-        </ListBox>
+        <ListBox x:Name="sortByListBox" HorizontalAlignment="Left" Height="122" Margin="90,209,0,0" VerticalAlignment="Top" Width="120"  SelectionMode="Multiple"/>
         <Button x:Name="okButton" Content="Ok" HorizontalAlignment="Left" Margin="18,349,0,0" VerticalAlignment="Top" Width="75" Click="okButton_Click"/>
         <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="135,348,0,0" VerticalAlignment="Top" Width="75" Click="cancelButton_Click"/>
-        <Label Content="Label range" HorizontalAlignment="Left" Margin="18,49,0,0" VerticalAlignment="Top" Height="23" Width="73"/>
-        <TextBox x:Name="labelRangeTextBox" HorizontalAlignment="Left" Height="23" Margin="90,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.753,0.478" KeyDown="labelRangeTextBox_KeyDown"/>
+        <Label Content="Label range" HorizontalAlignment="Left" Margin="18,49,0,0" VerticalAlignment="Top" Height="28" Width="73"/>
+        <TextBox x:Name="labelRangeTextBox" HorizontalAlignment="Left" Height="23" Margin="90,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.753,0.478" KeyDown="labelRangeTextBox_KeyDown" IsKeyboardFocusedChanged="labelRangeTextBox_IsKeyboardFocusedChanged"/>
         <Label Content="From row" HorizontalAlignment="Left" Margin="18,82,0,0" VerticalAlignment="Top" Height="27" Width="73"/>
         <Label Content="To row" HorizontalAlignment="Left" Margin="18,121,0,0" VerticalAlignment="Top" Height="30" Width="73"/>
         <TextBox x:Name="fromRowTextBox" HorizontalAlignment="Left" Height="23" Margin="90,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.753,0.478" KeyDown="labelRangeTextBox_KeyDown"/>

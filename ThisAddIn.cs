@@ -12,8 +12,8 @@ using GroupingTool.model;
 namespace GroupingTool {
     public partial class ThisAddIn {
         private void ThisAddIn_Startup(object sender, System.EventArgs e) {
-            this.Application.WorkbookBeforeSave 
-                += new Microsoft.Office.Interop.Excel.AppEvents_WorkbookBeforeSaveEventHandler(zzzz);
+            //this.Application.WorkbookBeforeSave 
+                //+= new Microsoft.Office.Interop.Excel.AppEvents_WorkbookBeforeSaveEventHandler(zzzz);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e) {
